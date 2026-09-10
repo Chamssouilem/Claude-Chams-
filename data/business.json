@@ -1,0 +1,307 @@
+{
+  "_anleitung": "Bearbeiten? Anleitung steht in der README.md im Projektstamm.",
+  "name": "Patties & Berries",
+  "legalName": "Patties & Berries",
+  "tagline": {
+    "de": "Burger Restaurant — Moers",
+    "en": "Burger Restaurant — Moers"
+  },
+  "url": "https://pattiesandberries.de",
+  "previousUrl": "https://patties-and-berries.eatbu.com",
+  "address": {
+    "street": "Uerdinger Straße 101b",
+    "postalCode": "47441",
+    "city": "Moers",
+    "region": "Nordrhein-Westfalen",
+    "country": "DE",
+    "countryName": {
+      "de": "Deutschland",
+      "en": "Germany"
+    }
+  },
+  "geo": {
+    "lat": 51.44316,
+    "lng": 6.6385
+  },
+  "contact": {
+    "phoneE164": "+491781792245",
+    "phoneDisplay": "0178 179 22 45",
+    "whatsappNumber": "491781792245",
+    "email": "info@pattiesandberries.de"
+  },
+  "social": {
+    "instagram": "https://www.instagram.com/pattiesandberries",
+    "instagramHandle": "@pattiesandberries",
+    "facebook": "https://www.facebook.com/p/Patties-Berries-100070936021431/"
+  },
+  "impressum": {
+    "operatorName": "Yeter",
+    "operatorNameNeedsReview": true,
+    "vatId": "DE361346199",
+    "contentResponsible": "Yeter",
+    "legalForm": {
+      "de": "Einzelunternehmen",
+      "en": "Sole proprietorship"
+    }
+  },
+  "hours": {
+    "timezone": "Europe/Berlin",
+    "week": [
+      {
+        "day": 1,
+        "key": "monday",
+        "open": "15:00",
+        "close": "21:30",
+        "closed": false
+      },
+      {
+        "day": 2,
+        "key": "tuesday",
+        "open": "15:00",
+        "close": "21:30",
+        "closed": false
+      },
+      {
+        "day": 3,
+        "key": "wednesday",
+        "open": "15:00",
+        "close": "21:30",
+        "closed": false
+      },
+      {
+        "day": 4,
+        "key": "thursday",
+        "open": "15:00",
+        "close": "21:30",
+        "closed": false
+      },
+      {
+        "day": 5,
+        "key": "friday",
+        "open": "15:00",
+        "close": "22:00",
+        "closed": false
+      },
+      {
+        "day": 6,
+        "key": "saturday",
+        "open": "15:00",
+        "close": "22:00",
+        "closed": false
+      },
+      {
+        "day": 0,
+        "key": "sunday",
+        "open": "15:00",
+        "close": "22:00",
+        "closed": false
+      }
+    ],
+    "exceptions": [
+      {
+        "date": "2026-12-24",
+        "closed": true,
+        "note": {
+          "de": "Heiligabend geschlossen",
+          "en": "Closed on Christmas Eve"
+        }
+      },
+      {
+        "date": "2026-12-25",
+        "closed": true,
+        "note": {
+          "de": "1. Weihnachtsfeiertag geschlossen",
+          "en": "Closed on Christmas Day"
+        }
+      }
+    ]
+  },
+  "ratings": {
+    "google": {
+      "value": 4.7,
+      "count": 1277,
+      "url": "https://www.google.com/maps/search/?api=1&query=Patties+%26+Berries+Uerdinger+Stra%C3%9Fe+101b+47441+Moers"
+    },
+    "restaurantGuru": {
+      "value": 4.8,
+      "count": 1295
+    },
+    "tripadvisor": {
+      "value": 4.8,
+      "rank": 11,
+      "outOf": 108
+    },
+    "asOf": "2025-11-20"
+  },
+  "amenities": [
+    {
+      "id": "takeaway",
+      "icon": "bag",
+      "de": "Abholung",
+      "en": "Takeaway"
+    },
+    {
+      "id": "delivery",
+      "icon": "scooter",
+      "de": "Lieferung",
+      "en": "Delivery"
+    },
+    {
+      "id": "catering",
+      "icon": "tray",
+      "de": "Catering",
+      "en": "Catering"
+    },
+    {
+      "id": "events",
+      "icon": "sparkle",
+      "de": "Private Feiern",
+      "en": "Private events"
+    },
+    {
+      "id": "outdoor",
+      "icon": "sun",
+      "de": "Außenplätze (wenige)",
+      "en": "Outdoor seating (limited)"
+    },
+    {
+      "id": "ac",
+      "icon": "snowflake",
+      "de": "Klimaanlage",
+      "en": "Air conditioning"
+    },
+    {
+      "id": "stepfree",
+      "icon": "accessible",
+      "de": "Barrierefreier Zugang",
+      "en": "Step-free access"
+    },
+    {
+      "id": "pets",
+      "icon": "paw",
+      "de": "Hunde willkommen",
+      "en": "Pets allowed"
+    },
+    {
+      "id": "smoking",
+      "icon": "smoke",
+      "de": "Raucherbereich",
+      "en": "Smoking area"
+    },
+    {
+      "id": "parking",
+      "icon": "car",
+      "de": "Parkplätze",
+      "en": "Parking"
+    }
+  ],
+  "payment": {
+    "methods": [
+      {
+        "id": "cash",
+        "de": "Bargeld",
+        "en": "Cash"
+      },
+      {
+        "id": "girocard",
+        "de": "EC / Girocard",
+        "en": "EC / Girocard"
+      },
+      {
+        "id": "maestro",
+        "de": "Maestro",
+        "en": "Maestro"
+      },
+      {
+        "id": "visa",
+        "de": "VISA",
+        "en": "VISA"
+      },
+      {
+        "id": "mastercard",
+        "de": "Mastercard",
+        "en": "Mastercard"
+      },
+      {
+        "id": "contactless",
+        "de": "Kontaktlos",
+        "en": "Contactless"
+      },
+      {
+        "id": "applepay",
+        "de": "Apple Pay",
+        "en": "Apple Pay"
+      },
+      {
+        "id": "paypal",
+        "de": "PayPal",
+        "en": "PayPal"
+      }
+    ],
+    "schemaOrg": [
+      "Cash",
+      "Credit Card",
+      "Debit Card",
+      "Girocard",
+      "Maestro",
+      "VISA",
+      "Mastercard",
+      "Apple Pay",
+      "PayPal",
+      "Contactless"
+    ]
+  },
+  "parking": {
+    "de": "4 Stellplätze direkt in unserer Einfahrt, dazu Parkplätze an der Uerdinger Straße.",
+    "en": "4 spaces right in our driveway, plus street parking on Uerdinger Straße."
+  },
+  "seatingNote": {
+    "de": "Unser Laden ist klein und gemütlich — zu Stoßzeiten kann es voll werden. Vorbestellen lohnt sich.",
+    "en": "Our place is small and casual — it fills up at peak times. Ordering ahead is worth it."
+  },
+  "delivery": {
+    "active": true,
+    "channel": "direct",
+    "feeNote": {
+      "de": "Je nach Entfernung kann eine Liefergebühr anfallen. Wir nennen sie dir bei der telefonischen Bestätigung — vorher wird nichts berechnet.",
+      "en": "Depending on distance a delivery fee may apply. We'll tell you the exact amount when we confirm by phone — nothing is charged before that."
+    },
+    "areas": [
+      "Moers",
+      "Moers-Hülsdonk",
+      "Moers-Repelen",
+      "Moers-Kapellen",
+      "Neukirchen-Vluyn",
+      "Rheinberg",
+      "Kamp-Lintfort",
+      "Duisburg-Rheinhausen",
+      "Duisburg-Homberg"
+    ],
+    "areasNeedReview": true,
+    "minOrder": null
+  },
+  "reservations": {
+    "accepted": false,
+    "note": {
+      "de": "Tische reservieren wir nicht — dafür ist der Laden zu klein. Vorbestellen kannst du aber jederzeit, dann steht dein Essen fertig bereit.",
+      "en": "We don't take table reservations — the room is too small for that. You can always pre-order, though, and your food will be ready when you arrive."
+    }
+  },
+  "vouchers": {
+    "available": true,
+    "anyAmount": true,
+    "redeemInStore": true
+  },
+  "priceRange": "€€",
+  "currency": "EUR",
+  "servesCuisine": [
+    "American",
+    "Burger",
+    "Fast Food"
+  ],
+  "foundingStory": {
+    "startedAt": "Kaufland Moers-Hülsdonk",
+    "founder": "Emre",
+    "founderNeedsReview": true
+  }
+}

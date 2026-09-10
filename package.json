@@ -1,0 +1,37 @@
+{
+  "name": "pattiesandberries",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Website für Patties & Berries — Burger Restaurant, Uerdinger Straße 101b, 47441 Moers",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "npx serve out",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "fonts": "node scripts/fetch-fonts.mjs",
+    "check:contrast": "node scripts/check-contrast.mjs",
+    "check:data": "node scripts/check-data.mjs",
+    "check": "npm run typecheck && npm run check:contrast && npm run check:data",
+    "check:budget": "node scripts/check-budget.mjs",
+    "photo-brief": "node scripts/make-photo-brief.mjs",
+    "icons": "node scripts/make-icons.mjs"
+  },
+  "dependencies": {
+    "next": "15.5.25",
+    "react": "19.1.1",
+    "react-dom": "19.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "22.15.3",
+    "@types/react": "19.1.8",
+    "@types/react-dom": "19.1.6",
+    "autoprefixer": "10.4.21",
+    "postcss": "8.5.6",
+    "tailwindcss": "3.4.17",
+    "typescript": "5.8.3"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
