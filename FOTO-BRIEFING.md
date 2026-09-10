@@ -18,6 +18,11 @@ fremden Bildes. Das ist ehrlicher und kostet weniger Vertrauen.
 Ein halber Tag Foto-Shooting im Laden bringt für die Bestellquote mehr als jede
 einzelne Gestaltungsentscheidung an dieser Seite.
 
+Für das Gespräch mit der Fotografin oder dem Fotografen gibt es zu jeder Aufnahme
+unten einen fertigen Bildgenerator-Prompt in [BILD-PROMPTS.md](./BILD-PROMPTS.md).
+Damit lässt sich vorab ein Referenzbild erzeugen, das Licht, Winkel und Stimmung
+zeigt — als Moodboard, nicht als Ersatz für die echte Aufnahme.
+
 ## Rahmenbedingungen für alle Aufnahmen
 
 - **Licht:** warm und seitlich, kein direkter Blitz von vorn. Die Seite ist dunkel

@@ -50,7 +50,7 @@ solange er offen ist.
 | 4 | **Echte Bewertungszitate** | Aktuell stehen dort Platzhalter. Erfundene oder geschönte Bewertungen verstoßen gegen § 5 UWG (Anhang Nr. 23b) und sind abmahnfähig. | `data/reviews.json`, danach `verified: true` |
 | 5 | **WhatsApp-Nummer testen** | Das Briefing nannte `4917817922450` (13 Stellen). Aus +49 178 179 22 45 ergibt sich international `491781792245` (12 Stellen); diese Variante ist eingetragen. **Einmal auf den WhatsApp-Knopf klicken und prüfen, ob der richtige Chat aufgeht.** Stimmt sie nicht, geht jede Bestellung ins Leere. | `data/business.json` → `contact.phoneE164` und `contact.whatsappNumber` |
 | 6 | **Liefert ihr, und über welchen Kanal?** | Uber Eats listet den Laden derzeit als nicht verfügbar. Wenn nicht geliefert wird: `delivery.active` auf `false` — dann verschwindet der Liefer-Modus aus der Bestellstrecke und aus den strukturierten Daten. | `data/business.json` → `delivery` |
-| 7 | **Fotos** | Siehe [FOTO-BRIEFING.md](./FOTO-BRIEFING.md). Solange keine echten Fotos vorliegen, zeigt die Seite beschriftete Platzhalter — bewusst, statt Stock- oder KI-Bilder einzusetzen. | `data/photos.json` |
+| 7 | **Fotos** | Siehe [FOTO-BRIEFING.md](./FOTO-BRIEFING.md) und [BILD-PROMPTS.md](./BILD-PROMPTS.md). Solange keine echten Fotos vorliegen, zeigt die Seite beschriftete Platzhalter — bewusst, statt Stock- oder KI-Bilder einzusetzen. | `data/photos.json` |
 | 8 | **Rechtstexte anwaltlich prüfen lassen** | Impressum und Datenschutzerklärung sind sorgfältig vorbereitete Entwürfe, aber keine Rechtsberatung. Die zu prüfenden Stellen sind auf den Seiten farbig hervorgehoben. | `components/pages/*Content.tsx` |
 | 9 | **Getränkeauswahl anpassen** | Die Getränkeliste in der Bestellstrecke ist ein Startpunkt und muss an das tatsächliche Sortiment angeglichen werden. | `data/menu.json` → Kategorie `getraenke` → `options` |
 
@@ -156,6 +156,12 @@ sie hin.
 Die vollständige Liste der benötigten Aufnahmen mit Maßen und Bildideen steht in
 **[FOTO-BRIEFING.md](./FOTO-BRIEFING.md)** — diese Datei kann direkt an eine
 Fotografin oder einen Fotografen weitergegeben werden.
+
+Passend dazu enthält **[BILD-PROMPTS.md](./BILD-PROMPTS.md)** zu jeder Aufnahme einen
+fertigen Prompt für Bildgeneratoren. Gedacht sind die Bilder als Moodboard für das
+Shooting — Licht, Winkel, Bildausschnitt —, nicht als Ersatz für echte Fotos.
+Texturen und abstrakte Hintergründe aus Teil B der Datei sind dagegen direkt
+einsetzbar.
 
 **So kommt ein Foto auf die Seite:**
 
