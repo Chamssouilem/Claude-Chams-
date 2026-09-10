@@ -9,25 +9,33 @@ import { readFile } from 'node:fs/promises';
 
 const css = await readFile(new URL('../app/globals.css', import.meta.url), 'utf8');
 
-/** Alle --pb-*-Variablen aus dem :root-Block einlesen. */
-function readTokens(source) {
-  const root = source.slice(source.indexOf(':root {'), source.indexOf('@media (min-width: 900px)'));
+/**
+ * Farbwerte einlesen.
+ *
+ * Die Token stehen als Kanalwerte in der CSS ("--pb-ink-rgb: 20 16 14"), weil
+ * Tailwinds Deckkraft-Schreibweise das so verlangt. Hier werden sie für die
+ * Rechnung wieder in Hex übersetzt — geprüft wird also genau das, was
+ * ausgeliefert wird.
+ */
+function parseChannels(block) {
   const tokens = {};
-  for (const m of root.matchAll(/(--pb-[\w-]+):\s*(#[0-9a-fA-F]{6})\s*;/g)) {
-    tokens[m[1]] = m[2];
+  for (const m of block.matchAll(/(--pb-[\w-]+)-rgb:\s*(\d+)\s+(\d+)\s+(\d+)\s*;/g)) {
+    tokens[m[1]] =
+      '#' + [m[2], m[3], m[4]].map((n) => Number(n).toString(16).padStart(2, '0')).join('');
   }
   return tokens;
+}
+
+function readTokens(source) {
+  return parseChannels(
+    source.slice(source.indexOf(':root {'), source.indexOf('@media (min-width: 900px)')),
+  );
 }
 
 /** Die abweichenden Werte der hellen Sektion (.on-cream). */
 function readCreamTokens(source) {
   const start = source.indexOf('.on-cream {');
-  const block = source.slice(start, source.indexOf('}', start));
-  const tokens = {};
-  for (const m of block.matchAll(/(--pb-[\w-]+):\s*(#[0-9a-fA-F]{6})\s*;/g)) {
-    tokens[m[1]] = m[2];
-  }
-  return tokens;
+  return parseChannels(source.slice(start, source.indexOf('}', start)));
 }
 
 const toRgb = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16) / 255);
@@ -71,6 +79,9 @@ const checks = [
   ['Status „geschlossen“ / Fehler',    T['--pb-closed'],      T['--pb-ink'],    4.5],
   ['Fehlertext auf Eingabefeld',       T['--pb-closed'],      T['--pb-ink-4'],  4.5],
   ['Schrift auf Beerenfläche',         cream,                 T['--pb-berry'],  4.5],
+  ['Messing auf Basis',                T['--pb-brass'],       T['--pb-ink'],    4.5],
+  ['Messing auf Karte',                T['--pb-brass'],       T['--pb-ink-3'],  4.5],
+  ['Messing auf Fläche 2',             T['--pb-brass'],       T['--pb-ink-2'],  4.5],
   // Helle Sektion (.on-cream): dort werden die Variablen umdefiniert
   ['hell: Fließtext',                  C['--pb-cream'],       T['--pb-cream'],  4.5],
   ['hell: Sekundärtext',               C['--pb-cream-dim'],   T['--pb-cream'],  4.5],
@@ -79,6 +90,10 @@ const checks = [
   ['hell: Beerenschrift',              C['--pb-berry-text'],  T['--pb-cream'],  4.5],
   ['hell: Fließtext auf Karte',        C['--pb-cream'],       C['--pb-ink-3'],  4.5],
   ['hell: Hilfstext auf Karte',        C['--pb-muted'],       C['--pb-ink-3'],  4.5],
+  ['hell: Allergen-Kürzel',            C['--pb-cream-dim'],   C['--pb-ink-2'],  4.5],
+  ['dunkel: Allergen-Kürzel',          T['--pb-cream-dim'],   T['--pb-ink-2'],  4.5],
+  ['hell: Messing',                    T['--pb-brass-deep'],  T['--pb-paper'],  4.5],
+  ['helle Fläche gegen dunkle Basis',  T['--pb-paper'],       T['--pb-ink'],    3],
 ];
 
 let failed = 0;

@@ -15,7 +15,7 @@
     "check": "npm run typecheck && npm run check:contrast && npm run check:data",
     "check:budget": "node scripts/check-budget.mjs",
     "photo-brief": "node scripts/make-photo-brief.mjs",
-    "icons": "node scripts/make-icons.mjs"
+    "icons": "python3 scripts/make-icons.py"
   },
   "dependencies": {
     "next": "15.5.25",

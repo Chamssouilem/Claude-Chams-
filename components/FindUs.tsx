@@ -12,7 +12,7 @@ export function FindUs({ locale }: { locale: Locale }) {
   const waHref = `https://wa.me/${business.contact.whatsappNumber}`;
 
   return (
-    <section id="finden" className="section border-b border-line" aria-labelledby="find-title">
+    <section id="finden" className="surface-night section border-b border-line" aria-labelledby="find-title">
       <div className="shell">
         <Reveal>
           <p className="kicker">{d.find.kicker}</p>

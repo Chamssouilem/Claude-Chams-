@@ -16,7 +16,7 @@ export function Faq({ locale }: { locale: Locale }) {
   const x = c(locale);
 
   return (
-    <section id="faq" className="section border-b border-line bg-ink-2" aria-labelledby="faq-title">
+    <section id="faq" className="surface-night section border-t border-line" aria-labelledby="faq-title">
       <div className="shell grid gap-block md:grid-cols-12 md:gap-10">
         <Reveal className="md:col-span-4">
           <p className="kicker">{x.faq.kicker}</p>

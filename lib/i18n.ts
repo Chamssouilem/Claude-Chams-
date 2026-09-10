@@ -46,7 +46,7 @@ const de = {
     required: 'Pflichtfeld',
     showMore: 'Mehr anzeigen',
     showLess: 'Weniger anzeigen',
-    barTagline: 'Frisch gewolft, alles helal',
+    barTagline: 'Frisch gewolft · helal',
   },
 
   nav: {
@@ -309,7 +309,7 @@ const en: Dict = {
     required: 'Required',
     showMore: 'Show more',
     showLess: 'Show less',
-    barTagline: 'Ground fresh, all halal',
+    barTagline: 'Ground fresh · halal',
   },
 
   nav: {

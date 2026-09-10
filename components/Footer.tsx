@@ -5,7 +5,8 @@ import { business } from '@/lib/data';
 import { groupedHours } from '@/lib/hours';
 import { LEGAL_ROUTES, t } from '@/lib/i18n';
 import { useConsent } from '@/lib/consent';
-import { LogoMark, Wordmark } from './Wordmark';
+import { Wordmark } from './Wordmark';
+import { Seal } from './Seal';
 import { IconCard, IconFacebook, IconInstagram, IconMail, IconPhone } from './Icons';
 import type { Locale } from '@/lib/types';
 
@@ -24,12 +25,12 @@ export function Footer({ locale, homeHref }: { locale: Locale; homeHref: string 
   ];
 
   return (
-    <footer className="no-print border-t border-line bg-ink-2">
+    <footer className="no-print surface-night border-t border-line">
       <div className="shell py-block">
         <div className="grid gap-10 md:grid-cols-12">
           <div className="md:col-span-4">
-            <Link href={homeHref} className="inline-flex items-center gap-2.5 no-underline">
-              <LogoMark size={34} />
+            <Link href={homeHref} className="inline-flex items-center gap-3.5 no-underline">
+              <Seal locale={locale} size={96} className="seal-sm h-[54px] w-[54px]" />
               <Wordmark stacked className="text-[1.25rem]" />
             </Link>
             <p className="measure mt-4 text-small leading-relaxed text-cream-dim">

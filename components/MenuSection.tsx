@@ -28,6 +28,14 @@ function needsOptions(categoryId: string): boolean {
   return categoryId === 'burger' || categoryId === 'getraenke';
 }
 
+/**
+ * Die Speisekarte.
+ *
+ * Sie steht auf Metzgerpapier, nicht auf dunklem Grund. Eine Karte ist
+ * gedruckt — auf Papier wirken die Führungspunkte wie eine Preistafel im Laden
+ * und nicht wie eine Tabelle im Netz. Zugleich bricht der helle Block die Reihe
+ * dunkler Abschnitte auf, die sonst über zehn Sektionen ermüdet.
+ */
 export function MenuSection({ locale }: { locale: Locale }) {
   const d = t(locale);
   const [query, setQuery] = useState('');
@@ -68,7 +76,11 @@ export function MenuSection({ locale }: { locale: Locale }) {
     ?.items.filter((i) => i.featured) ?? [];
 
   return (
-    <section id="speisekarte" className="section border-b border-line" aria-labelledby="menu-title">
+    <section
+      id="speisekarte"
+      className="on-cream surface-paper section"
+      aria-labelledby="menu-title"
+    >
       <div className="shell">
         <Reveal>
           <p className="kicker">{d.menu.kicker}</p>
@@ -176,7 +188,7 @@ export function MenuSection({ locale }: { locale: Locale }) {
         {!isFiltered && (
           <nav
             aria-label={d.menu.categoryNavLabel}
-            className="sticky top-header z-30 -mx-gutter mt-6 border-y border-line bg-ink/95 px-gutter backdrop-blur-md"
+            className="sticky top-header z-30 -mx-gutter mt-6 border-y border-line bg-paper/95 px-gutter backdrop-blur-md"
           >
             <ul className="no-scrollbar flex gap-1 overflow-x-auto py-2">
               {menu.categories.map((cat) => (
@@ -404,7 +416,7 @@ function FeaturedCard({
             className="w-full"
           />
         ) : null}
-        <span className="absolute left-3 top-3 rounded-sm bg-berry px-2 py-1 text-micro font-semibold uppercase tracking-[0.14em] text-cream">
+        <span className="absolute bottom-3 left-3 rounded-sm bg-berry px-2 py-1 text-micro font-semibold uppercase tracking-[0.14em] text-paper">
           {d.menu.signature}
         </span>
       </div>

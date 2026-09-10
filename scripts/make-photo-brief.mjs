@@ -39,6 +39,11 @@ lines.push('');
 lines.push('Ein halber Tag Foto-Shooting im Laden bringt für die Bestellquote mehr als jede');
 lines.push('einzelne Gestaltungsentscheidung an dieser Seite.');
 lines.push('');
+lines.push('Für das Gespräch mit der Fotografin oder dem Fotografen gibt es zu jeder Aufnahme');
+lines.push('unten einen fertigen Bildgenerator-Prompt in [BILD-PROMPTS.md](./BILD-PROMPTS.md).');
+lines.push('Damit lässt sich vorab ein Referenzbild erzeugen, das Licht, Winkel und Stimmung');
+lines.push('zeigt — als Moodboard, nicht als Ersatz für die echte Aufnahme.');
+lines.push('');
 
 lines.push('## Rahmenbedingungen für alle Aufnahmen');
 lines.push('');

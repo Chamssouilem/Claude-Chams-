@@ -2,6 +2,11 @@ import type { Config } from 'tailwindcss';
 
 /**
  * Tailwind greift auf dieselben CSS-Variablen zu wie app/globals.css.
+ *
+ * Die Farben stehen als KANALWERTE in den Variablen ("20 16 14" statt
+ * "#14100e"). Nur so funktionieren Tailwinds Deckkraft-Angaben wie bg-ink/95:
+ * Sie setzen den Wert in rgb(... / .95) ein, und ein Hex-Wert wäre dort
+ * ungültiges CSS — der Browser verwirft die Regel stillschweigend.
  * Farben werden hier NICHT noch einmal als Hex-Werte hinterlegt — es gibt
  * genau eine Quelle, und die steht im :root-Block der globals.css.
  */
@@ -21,33 +26,38 @@ const config: Config = {
     extend: {
       colors: {
         ink: {
-          DEFAULT: 'var(--pb-ink)',
-          2: 'var(--pb-ink-2)',
-          3: 'var(--pb-ink-3)',
-          4: 'var(--pb-ink-4)',
+          DEFAULT: 'rgb(var(--pb-ink-rgb) / <alpha-value>)',
+          2: 'rgb(var(--pb-ink-2-rgb) / <alpha-value>)',
+          3: 'rgb(var(--pb-ink-3-rgb) / <alpha-value>)',
+          4: 'rgb(var(--pb-ink-4-rgb) / <alpha-value>)',
         },
         line: {
-          DEFAULT: 'var(--pb-line)',
-          strong: 'var(--pb-line-strong)',
+          DEFAULT: 'rgb(var(--pb-line-rgb) / <alpha-value>)',
+          strong: 'rgb(var(--pb-line-strong-rgb) / <alpha-value>)',
         },
         cream: {
-          DEFAULT: 'var(--pb-cream)',
-          dim: 'var(--pb-cream-dim)',
+          DEFAULT: 'rgb(var(--pb-cream-rgb) / <alpha-value>)',
+          dim: 'rgb(var(--pb-cream-dim-rgb) / <alpha-value>)',
         },
-        muted: 'var(--pb-muted)',
+        muted: 'rgb(var(--pb-muted-rgb) / <alpha-value>)',
         ember: {
-          DEFAULT: 'var(--pb-ember)',
-          hover: 'var(--pb-ember-hover)',
-          bright: 'var(--pb-ember-bright)',
-          text: 'var(--pb-ember-text)',
+          DEFAULT: 'rgb(var(--pb-ember-rgb) / <alpha-value>)',
+          hover: 'rgb(var(--pb-ember-hover-rgb) / <alpha-value>)',
+          bright: 'rgb(var(--pb-ember-bright-rgb) / <alpha-value>)',
+          text: 'rgb(var(--pb-ember-text-rgb) / <alpha-value>)',
         },
         berry: {
-          DEFAULT: 'var(--pb-berry)',
-          text: 'var(--pb-berry-text)',
+          DEFAULT: 'rgb(var(--pb-berry-rgb) / <alpha-value>)',
+          text: 'rgb(var(--pb-berry-text-rgb) / <alpha-value>)',
         },
+        brass: {
+          DEFAULT: 'rgb(var(--pb-brass-rgb) / <alpha-value>)',
+          deep: 'rgb(var(--pb-brass-deep-rgb) / <alpha-value>)',
+        },
+        paper: 'rgb(var(--pb-paper-rgb) / <alpha-value>)',
         signal: {
-          open: 'var(--pb-open)',
-          closed: 'var(--pb-closed)',
+          open: 'rgb(var(--pb-open-rgb) / <alpha-value>)',
+          closed: 'rgb(var(--pb-closed-rgb) / <alpha-value>)',
         },
       },
       fontFamily: {
