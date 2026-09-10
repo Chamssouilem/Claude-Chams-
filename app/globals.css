@@ -1,0 +1,686 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Selbstgehostete Schriften. Kein Aufruf an Google — weder beim Build noch im
+   Browser. Die Datei wird von scripts/fetch-fonts.mjs erzeugt und hier beim
+   Build eingebettet, damit keine zusätzliche CSS-Anfrage entsteht. */
+@import './fonts.generated.css';
+
+/* ==========================================================================
+   Design-Token
+   Alle Farben, Größen und Abstände stehen genau hier. Wer das Erscheinungsbild
+   ändern will, ändert diese Werte — nicht die Komponenten.
+   Kontrastwerte sind geprüft: `npm run check:contrast`
+   ========================================================================== */
+
+:root {
+  color-scheme: dark;
+
+  /* --- Farben: dunkler Grund ------------------------------------------- */
+  --pb-ink: #141210;        /* Basis, fast schwarz mit Wärme */
+  --pb-ink-2: #1c1815;      /* leicht abgesetzte Fläche */
+  --pb-ink-3: #26211d;      /* Karten */
+  --pb-ink-4: #302925;      /* Karten im Hover, Eingabefelder */
+  --pb-line: #3d362f;       /* Trennlinien */
+  --pb-line-strong: #4a4138;
+
+  /* --- Farben: Schrift -------------------------------------------------- */
+  --pb-cream: #f5f0e8;      /* Fließtext auf dunklem Grund (16,5:1) */
+  --pb-cream-dim: #cfc6b8;  /* Sekundärtext (11,1:1) */
+  --pb-muted: #a79c8d;      /* Beschriftungen, Hilfstexte (6,9:1) */
+
+  /* --- Akzent: gebranntes Amber, ausschließlich für Handlungen ---------- */
+  --pb-ember: #b83d1b;         /* CTA-Fläche, cremefarbene Schrift 4,97:1 */
+  --pb-ember-hover: #a93415;   /* gedrückt / Hover, 5,80:1 */
+  --pb-ember-bright: #e0561f;  /* Linien, Fokusring, UI (4,91:1 auf ink) */
+  --pb-ember-text: #f0714a;    /* Akzentschrift auf dunkel (6,38:1) */
+
+  /* --- Akzent: Beere, sparsam — das Augenzwinkern im Namen -------------- */
+  --pb-berry: #7a2e45;
+  --pb-berry-text: #ce7489;
+
+  /* --- Signalfarben ----------------------------------------------------- */
+  --pb-open: #7ec98a;
+  --pb-closed: #d08195;
+
+  /* --- Schrift ---------------------------------------------------------- */
+  --font-display: 'Anton', 'Arial Narrow', 'Helvetica Neue', Impact, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+  /* Fließende Größen — keine festen px-Werte */
+  /* Höchstwert bewusst auf 4,75rem begrenzt: Die Überschrift steht in einer
+     halbbreiten Spalte, nicht über die ganze Seite. Größer läuft „HANDARBEIT.“
+     auf breiten Monitoren aus der Spalte heraus. */
+  --fs-display: clamp(2.75rem, 1.5rem + 5.4vw, 4.75rem);
+  --fs-h2: clamp(2rem, 1.35rem + 2.9vw, 3.75rem);
+  --fs-h3: clamp(1.375rem, 1.16rem + 0.95vw, 1.875rem);
+  --fs-h4: clamp(1.125rem, 1.05rem + 0.35vw, 1.3125rem);
+  --fs-lead: clamp(1.0625rem, 1rem + 0.5vw, 1.375rem);
+  --fs-body: clamp(1rem, 0.975rem + 0.12vw, 1.0625rem);
+  --fs-small: 0.875rem;
+  --fs-micro: 0.75rem;
+  --lh-body: 1.65;
+  --measure: 68ch;
+
+  /* --- Raum ------------------------------------------------------------- */
+  --gutter: clamp(1.25rem, 0.6rem + 2.8vw, 3rem);
+  --space-section: clamp(4rem, 1.5rem + 9vw, 8rem);
+  --space-block: clamp(2rem, 1rem + 4vw, 4rem);
+  --max-w: 1240px;
+
+  /* --- Form ------------------------------------------------------------- */
+  --radius: 4px;
+  --radius-sm: 2px;
+  --header-h: 60px;
+  --bottombar-h: 68px;
+
+  /* --- Bewegung --------------------------------------------------------- */
+  --ease: cubic-bezier(0.2, 0.6, 0.3, 1);
+  --dur: 400ms;
+}
+
+@media (min-width: 900px) {
+  :root {
+    --header-h: 72px;
+    --bottombar-h: 0px;
+  }
+}
+
+/* ==========================================================================
+   Grundlagen
+   ========================================================================== */
+
+@layer base {
+  * {
+    min-width: 0; /* verhindert, dass Grid-/Flex-Kinder die Seite breiter machen */
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* Sprungziele landen nicht unter dem klebenden Kopf */
+    scroll-padding-top: calc(var(--header-h) + 12px);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--pb-ink);
+    color: var(--pb-cream);
+    font-family: var(--font-body);
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    font-synthesis-weight: none;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    /* Platz für die feste Bestellleiste auf dem Handy */
+    padding-bottom: var(--bottombar-h);
+    overflow-x: clip;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: -0.015em;
+    line-height: 0.95;
+    text-wrap: balance;
+  }
+
+  h1 { font-size: var(--fs-display); }
+  h2 { font-size: var(--fs-h2); }
+  h3 { font-size: var(--fs-h3); }
+  h4 { font-size: var(--fs-h4); letter-spacing: 0.01em; }
+
+  p { text-wrap: pretty; }
+
+  a {
+    color: inherit;
+    text-underline-offset: 0.2em;
+    text-decoration-thickness: from-font;
+  }
+
+  /* Sichtbarer Fokus überall — Tastaturbedienung darf nie raten müssen. */
+  :focus-visible {
+    outline: 3px solid var(--pb-ember-bright);
+    outline-offset: 3px;
+    border-radius: var(--radius-sm);
+  }
+  .on-cream :focus-visible {
+    outline-color: var(--pb-ink);
+  }
+
+  ::selection {
+    background: var(--pb-ember);
+    color: var(--pb-cream);
+  }
+
+  /* Zahlen laufen in Spalten sauber untereinander */
+  .tnum,
+  [data-price],
+  table {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum' 1;
+  }
+
+  img, svg, video {
+    display: block;
+    max-width: 100%;
+  }
+
+  input, select, textarea, button {
+    font: inherit;
+    color: inherit;
+  }
+
+  /* iOS zoomt bei Feldern unter 16px automatisch hinein */
+  input, select, textarea {
+    font-size: max(16px, var(--fs-body));
+  }
+
+  [hidden] { display: none !important; }
+}
+
+/* ==========================================================================
+   Bausteine
+   ========================================================================== */
+
+@layer components {
+  .shell {
+    width: 100%;
+    max-width: var(--max-w);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  .section {
+    padding-block: var(--space-section);
+    position: relative;
+  }
+
+  /* Helle Sektion — invertiert die Textfarben mit geprüften Kontrasten */
+  .on-cream {
+    background: var(--pb-cream);
+    color: var(--pb-ink);
+    --pb-cream: #141210;
+    --pb-cream-dim: #3d362f;
+    --pb-muted: #5c534a;
+    --pb-line: #d8d0c3;
+    --pb-line-strong: #c2b8a8;
+    --pb-ink-3: #ebe4d9;
+    --pb-ink-4: #e2dace;
+    --pb-ember-text: #9a2f10;
+    --pb-berry-text: #7a2e45;
+  }
+
+  .kicker {
+    font-family: var(--font-body);
+    font-size: var(--fs-micro);
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--pb-ember-text);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .kicker::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, var(--pb-ember-bright), transparent);
+    opacity: 0.6;
+  }
+
+  .lead {
+    font-size: var(--fs-lead);
+    color: var(--pb-cream-dim);
+    max-width: var(--measure);
+    line-height: 1.55;
+  }
+
+  .prose-body {
+    max-width: var(--measure);
+    line-height: var(--lh-body);
+    color: var(--pb-cream-dim);
+  }
+  .prose-body > * + * { margin-top: 1.1em; }
+
+  /* --- Schaltflächen ---------------------------------------------------- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    padding: 0.85rem 1.4rem;
+    border-radius: var(--radius);
+    font-weight: 600;
+    font-size: var(--fs-small);
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: background-color 160ms var(--ease), border-color 160ms var(--ease),
+                transform 160ms var(--ease), box-shadow 160ms var(--ease);
+    /* Mindestgröße für Finger und für WCAG 2.2 „Target Size“ */
+    min-height: 44px;
+  }
+
+  .btn-primary {
+    background: var(--pb-ember);
+    color: #f5f0e8;
+    border-color: var(--pb-ember);
+  }
+  .btn-primary:hover {
+    background: var(--pb-ember-hover);
+    border-color: var(--pb-ember-bright);
+    transform: translateY(-1px);
+    box-shadow: 0 0 0 1px var(--pb-ember-bright), 0 6px 18px -8px rgb(224 86 31 / 0.7);
+  }
+  .btn-primary:active { transform: translateY(0); }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--pb-cream);
+    border-color: var(--pb-line-strong);
+  }
+  .btn-secondary:hover {
+    border-color: var(--pb-cream);
+    background: rgb(245 240 232 / 0.06);
+    transform: translateY(-1px);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--pb-cream-dim);
+    border-color: transparent;
+    padding-inline: 0.6rem;
+  }
+  .btn-ghost:hover { color: var(--pb-cream); }
+
+  .btn-whatsapp {
+    background: #1f7a44;
+    color: #ffffff;
+    border-color: #1f7a44;
+  }
+  .btn-whatsapp:hover {
+    background: #196636;
+    border-color: #2ea55c;
+    transform: translateY(-1px);
+  }
+
+  .btn-block { width: 100%; }
+
+  /* --- Karten ----------------------------------------------------------- */
+  .card {
+    background: var(--pb-ink-3);
+    border: 1px solid var(--pb-line);
+    border-radius: var(--radius);
+    transition: border-color 200ms var(--ease), transform 200ms var(--ease),
+                background-color 200ms var(--ease);
+  }
+  .card-interactive:hover {
+    border-color: var(--pb-ember-bright);
+    background: var(--pb-ink-4);
+    transform: translateY(-2px);
+  }
+
+  /* --- Preiszeile mit Führungspunkten: die Optik einer Tafel im Laden --- */
+  .leader {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    width: 100%;
+  }
+  .leader-fill {
+    flex: 1 1 auto;
+    height: 0;
+    border-bottom: 1px dotted var(--pb-line-strong);
+    transform: translateY(-0.25em);
+    min-width: 1.5rem;
+  }
+  .leader-price {
+    flex: 0 0 auto;
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  /* --- Chips / Filter --------------------------------------------------- */
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 0.9rem;
+    min-height: 40px;
+    border-radius: 999px;
+    border: 1px solid var(--pb-line-strong);
+    background: transparent;
+    color: var(--pb-cream-dim);
+    font-size: var(--fs-small);
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+    /* Bewusst einzelne Eigenschaften statt „all": Sonst blendet auch der
+       Fokusring über 160 ms ein, und Tastaturbedienung braucht eine sofortige
+       Rückmeldung. */
+    transition: background-color 160ms var(--ease), border-color 160ms var(--ease),
+                color 160ms var(--ease);
+  }
+  .chip:hover { border-color: var(--pb-cream); color: var(--pb-cream); }
+  .chip[aria-pressed='true'],
+  .chip[data-active='true'] {
+    background: var(--pb-cream);
+    color: var(--pb-ink);
+    border-color: var(--pb-cream);
+  }
+
+  /* --- Allergen-Kürzel -------------------------------------------------- */
+  .allergen-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 26px;
+    height: 22px;
+    padding-inline: 5px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--pb-line-strong);
+    background: var(--pb-ink-2);
+    color: var(--pb-cream-dim);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    cursor: help;
+  }
+
+  /* --- Statusanzeige geöffnet/geschlossen ------------------------------- */
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.85rem;
+    border-radius: 999px;
+    border: 1px solid var(--pb-line-strong);
+    background: rgb(20 18 16 / 0.72);
+    backdrop-filter: blur(8px);
+    font-size: var(--fs-small);
+    font-weight: 500;
+    /* Reserviert Platz, damit beim Laden nichts springt */
+    min-height: 34px;
+  }
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex: 0 0 auto;
+  }
+  .status-dot[data-state='open'] { background: var(--pb-open); }
+  .status-dot[data-state='closing-soon'] { background: #e8b04b; }
+  .status-dot[data-state='closed'],
+  .status-dot[data-state='opens-today'] { background: var(--pb-closed); }
+
+  /* --- Formularfelder --------------------------------------------------- */
+  .field-label {
+    display: block;
+    font-size: var(--fs-small);
+    font-weight: 600;
+    margin-bottom: 0.35rem;
+    color: var(--pb-cream);
+  }
+  .field-hint {
+    display: block;
+    font-size: var(--fs-micro);
+    color: var(--pb-muted);
+    margin-top: 0.3rem;
+    line-height: 1.45;
+  }
+  .field-error {
+    display: block;
+    font-size: var(--fs-small);
+    color: var(--pb-closed);
+    margin-top: 0.35rem;
+    font-weight: 500;
+  }
+  .input {
+    width: 100%;
+    padding: 0.7rem 0.85rem;
+    min-height: 46px;
+    background: var(--pb-ink-4);
+    border: 1px solid var(--pb-line-strong);
+    border-radius: var(--radius);
+    color: var(--pb-cream);
+    transition: border-color 160ms var(--ease);
+  }
+  .input::placeholder { color: var(--pb-muted); opacity: 1; }
+  .input:hover { border-color: var(--pb-muted); }
+  .input:focus { border-color: var(--pb-ember-bright); }
+  .input[aria-invalid='true'] { border-color: var(--pb-closed); }
+
+  /* --- Auswahl als Kachel (Abholen / Liefern / Vor Ort) ----------------- */
+  .segmented {
+    display: grid;
+    gap: 0.5rem;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 640px) {
+    .segmented { grid-template-columns: repeat(3, 1fr); }
+  }
+  .segment {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding: 0.85rem 1rem;
+    border: 1px solid var(--pb-line-strong);
+    border-radius: var(--radius);
+    background: var(--pb-ink-3);
+    cursor: pointer;
+    transition: border-color 160ms var(--ease), background-color 160ms var(--ease),
+                box-shadow 160ms var(--ease);
+    min-height: 62px;
+  }
+  .segment:hover { border-color: var(--pb-cream-dim); }
+  .segment:has(input:checked) {
+    border-color: var(--pb-ember-bright);
+    background: var(--pb-ink-4);
+    box-shadow: inset 0 0 0 1px var(--pb-ember-bright);
+  }
+  .segment:has(input:focus-visible) {
+    outline: 3px solid var(--pb-ember-bright);
+    outline-offset: 3px;
+  }
+
+  /* --- Trennlinie mit Akzent ------------------------------------------- */
+  .rule-ember {
+    height: 2px;
+    border: 0;
+    background: linear-gradient(to right, var(--pb-ember-bright) 0, var(--pb-ember-bright) 56px, var(--pb-line) 56px, var(--pb-line) 100%);
+  }
+
+  /* --- Große Ordnungsziffern für die Handwerk-Panels ------------------- */
+  /* --- Überschrift im Einstieg ----------------------------------------
+     Die Größe richtet sich nach der SPALTE, nicht nach dem Bildschirm. Eine
+     rein bildschirmbasierte clamp()-Angabe passt entweder auf dem 27-Zoll-
+     Monitor oder auf dem Laptop — nie auf beiden, weil die Spalte nur einen
+     Teil der Breite einnimmt. Container-Abfragen lösen genau das.
+     14cqi ist so gewählt, dass die längste Zeile („Echte Handarbeit.") in
+     jeder Spaltenbreite auf eine Zeile passt. */
+  .hero-col {
+    container-type: inline-size;
+    container-name: hero;
+  }
+  .hero-title {
+    font-size: var(--fs-display);
+  }
+  @supports (container-type: inline-size) {
+    .hero-title {
+      font-size: clamp(2.75rem, 14cqi, 4.75rem);
+    }
+  }
+
+  .panel-number {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 2rem + 4vw, 5rem);
+    line-height: 0.8;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--pb-line-strong);
+    letter-spacing: 0.02em;
+    user-select: none;
+  }
+
+  /* --- Rechtsseiten: lange Fließtexte, ruhig gesetzt ------------------- */
+  .legal-body {
+    max-width: 72ch;
+    color: var(--pb-cream-dim);
+  }
+  .legal-body h2 {
+    font-size: var(--fs-h3);
+    color: var(--pb-cream);
+    margin-top: 2.75rem;
+    margin-bottom: 0.9rem;
+    scroll-margin-top: calc(var(--header-h) + 16px);
+  }
+  .legal-body h2:first-child { margin-top: 0; }
+  .legal-body h3 {
+    font-size: var(--fs-h4);
+    color: var(--pb-cream);
+    margin-top: 1.75rem;
+    margin-bottom: 0.5rem;
+  }
+  .legal-body p { margin-bottom: 1rem; line-height: var(--lh-body); }
+  .legal-body ul,
+  .legal-body ol {
+    margin: 0 0 1.25rem 1.35rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .legal-body ul { list-style: disc; }
+  .legal-body ol { list-style: decimal; }
+  .legal-body li { padding-left: 0.25rem; }
+  .legal-body strong { color: var(--pb-cream); font-weight: 600; }
+  .legal-body a {
+    color: var(--pb-cream);
+    text-decoration: underline;
+    text-decoration-color: var(--pb-line-strong);
+    text-underline-offset: 0.25em;
+  }
+  .legal-body a:hover { text-decoration-color: var(--pb-ember-bright); }
+  .legal-body address {
+    font-style: normal;
+    margin-bottom: 1rem;
+    line-height: var(--lh-body);
+  }
+  /* Stellen, die noch geprüft werden müssen, sind nicht zu übersehen */
+  .legal-body .todo {
+    background: rgb(224 86 31 / 0.12);
+    border-bottom: 1px dashed var(--pb-ember-bright);
+    color: var(--pb-cream);
+    padding: 0 0.15em;
+  }
+  .legal-body table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+    font-size: var(--fs-small);
+  }
+  .legal-body th,
+  .legal-body td {
+    border: 1px solid var(--pb-line);
+    padding: 0.55rem 0.7rem;
+    text-align: left;
+    vertical-align: top;
+  }
+  .legal-body th {
+    background: var(--pb-ink-3);
+    color: var(--pb-cream);
+    font-weight: 600;
+  }
+
+  .skip-link {
+    position: absolute;
+    left: 0.5rem;
+    top: 0.5rem;
+    z-index: 100;
+    padding: 0.75rem 1.1rem;
+    background: var(--pb-cream);
+    color: var(--pb-ink);
+    border-radius: var(--radius);
+    font-weight: 600;
+    transform: translateY(-150%);
+    transition: transform 160ms var(--ease);
+  }
+  .skip-link:focus { transform: translateY(0); }
+}
+
+/* ==========================================================================
+   Bewegung — dezent, und vollständig abschaltbar
+   ========================================================================== */
+
+@layer utilities {
+  .reveal {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  .reveal[data-shown='true'] {
+    opacity: 1;
+    transform: none;
+    transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease);
+  }
+
+  .text-balance { text-wrap: balance; }
+  .measure { max-width: var(--measure); }
+
+  /* Nur für Screenreader */
+  .sr-only {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { scrollbar-width: none; }
+}
+
+/*
+  Wer im Betriebssystem „Bewegung reduzieren“ eingestellt hat, bekommt keine.
+  Kein Einblenden, kein Verschieben, kein weiches Scrollen.
+*/
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .btn:hover,
+  .card-interactive:hover {
+    transform: none !important;
+  }
+}
+
+/* Hoher Kontrast / erzwungene Farben (Windows-Kontrastmodus) */
+@media (forced-colors: active) {
+  .btn, .card, .chip, .input, .segment {
+    border: 1px solid ButtonBorder;
+  }
+  .status-dot { forced-color-adjust: none; }
+}
+
+@media print {
+  body { background: #fff; color: #000; padding-bottom: 0; }
+  .no-print { display: none !important; }
+}
