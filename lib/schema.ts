@@ -113,7 +113,7 @@ export function restaurantSchema(locale: Locale) {
     description: x.meta.description,
     url: SITE,
     image: imageUrls(),
-    logo: `${SITE}/logo.svg`,
+    logo: `${SITE}/img/logo-siegel.png`,
     telephone: business.contact.phoneE164,
     email: business.contact.email,
     address: postalAddress(),

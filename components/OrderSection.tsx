@@ -123,7 +123,7 @@ export function OrderSection({ locale }: { locale: Locale }) {
   );
 
   return (
-    <section id="bestellen" className="section border-b border-line" aria-labelledby="order-title">
+    <section id="bestellen" className="surface-night section border-b border-line" aria-labelledby="order-title">
       <div className="shell">
         <Reveal>
           <p className="kicker">{d.order.kicker}</p>

@@ -17,41 +17,75 @@
 :root {
   color-scheme: dark;
 
-  /* --- Farben: dunkler Grund ------------------------------------------- */
-  --pb-ink: #141210;        /* Basis, fast schwarz mit Wärme */
-  --pb-ink-2: #1c1815;      /* leicht abgesetzte Fläche */
-  --pb-ink-3: #26211d;      /* Karten */
-  --pb-ink-4: #302925;      /* Karten im Hover, Eingabefelder */
-  --pb-line: #3d362f;       /* Trennlinien */
-  --pb-line-strong: #4a4138;
+  /* ======================================================================
+     Die Farben stammen aus dem Logo — abgetastet, nicht geschätzt.
+     Der Kreisstempel bringt vier Töne mit: ein Rot, ein Messinggold, ein
+     warmes Creme und das dunkle Braun der Patties. Genau diese vier tragen
+     jetzt die ganze Seite, nur in andere Rollen verteilt: Das Braun wird zum
+     Grund, das Creme zur Schrift, das Rot zur Handlung, das Messing zum
+     Zierrat. So bleibt der Laden wiedererkennbar, ohne dass die Seite nach
+     Rot-Gelb-Schnellrestaurant aussieht — die Farben sind dieselben, die
+     Menge ist eine andere.
+     Alle Kombinationen geprüft: `npm run check:contrast`
+     ====================================================================== */
 
-  /* --- Farben: Schrift -------------------------------------------------- */
-  --pb-cream: #f5f0e8;      /* Fließtext auf dunklem Grund (16,5:1) */
-  --pb-cream-dim: #cfc6b8;  /* Sekundärtext (11,1:1) */
-  --pb-muted: #a79c8d;      /* Beschriftungen, Hilfstexte (6,9:1) */
+  /* --- Grund: das Patty-Braun des Logos, bis fast ins Schwarz gezogen --- */
+  --pb-ink-rgb: 20 16 14;
+  --pb-ink: rgb(var(--pb-ink-rgb));
+  --pb-ink-2-rgb: 29 23 20;
+  --pb-ink-2: rgb(var(--pb-ink-2-rgb));
+  --pb-ink-3-rgb: 39 31 27;
+  --pb-ink-3: rgb(var(--pb-ink-3-rgb));
+  --pb-ink-4-rgb: 50 40 34;
+  --pb-ink-4: rgb(var(--pb-ink-4-rgb));
+  --pb-line-rgb: 62 51 44;
+  --pb-line: rgb(var(--pb-line-rgb));
+  --pb-line-strong-rgb: 76 63 54;
+  --pb-line-strong: rgb(var(--pb-line-strong-rgb));
 
-  /* --- Akzent: gebranntes Amber, ausschließlich für Handlungen ---------- */
-  --pb-ember: #b83d1b;         /* CTA-Fläche, cremefarbene Schrift 4,97:1 */
-  --pb-ember-hover: #a93415;   /* gedrückt / Hover, 5,80:1 */
-  --pb-ember-bright: #e0561f;  /* Linien, Fokusring, UI (4,91:1 auf ink) */
-  --pb-ember-text: #f0714a;    /* Akzentschrift auf dunkel (6,38:1) */
+  /* --- Schrift: der Creme-Ton des äußeren Logorings (#FDF8E4) ---------- */
+  --pb-paper-rgb: 253 248 228;
+  --pb-paper: rgb(var(--pb-paper-rgb));      /* helle FLÄCHE — wird nie umdefiniert */
+  --pb-cream-rgb: 253 248 228;
+  --pb-cream: rgb(var(--pb-cream-rgb));      /* Fließtext auf dunklem Grund — 17,8:1 */
+  --pb-cream-dim-rgb: 214 203 180;
+  --pb-cream-dim: rgb(var(--pb-cream-dim-rgb));  /* Sekundärtext — 11,8:1 */
+  --pb-muted-rgb: 172 159 138;
+  --pb-muted: rgb(var(--pb-muted-rgb));      /* Beschriftungen — 7,3:1 */
 
-  /* --- Akzent: Beere, sparsam — das Augenzwinkern im Namen -------------- */
-  --pb-berry: #7a2e45;
-  --pb-berry-text: #ce7489;
+  /* --- Handlung: das Rot aus dem Logo, unverändert -------------------- */
+  --pb-ember-rgb: 196 55 43;
+  --pb-ember: rgb(var(--pb-ember-rgb));         /* CTA-Fläche, Cremeschrift 5,02:1 */
+  --pb-ember-hover-rgb: 173 42 31;
+  --pb-ember-hover: rgb(var(--pb-ember-hover-rgb));   /* gedrückt — 6,31:1 */
+  --pb-ember-bright-rgb: 224 88 64;
+  --pb-ember-bright: rgb(var(--pb-ember-bright-rgb));  /* Linien, Fokusring — 5,08:1 auf ink */
+  --pb-ember-text-rgb: 238 115 87;
+  --pb-ember-text: rgb(var(--pb-ember-text-rgb));    /* Akzentschrift auf dunkel — 6,51:1 */
 
-  /* --- Signalfarben ----------------------------------------------------- */
-  --pb-open: #7ec98a;
-  --pb-closed: #d08195;
+  /* --- Zierrat: der Goldring des Logos -------------------------------- */
+  --pb-brass-rgb: 225 168 89;
+  --pb-brass: rgb(var(--pb-brass-rgb));         /* auf dunklem Grund — 8,96:1 */
+  --pb-brass-deep-rgb: 143 98 29;
+  --pb-brass-deep: rgb(var(--pb-brass-deep-rgb));    /* dieselbe Rolle auf Creme — 5,02:1 */
+
+  /* --- Das Augenzwinkern im Namen, sehr sparsam ----------------------- */
+  --pb-berry-rgb: 122 46 69;
+  --pb-berry: rgb(var(--pb-berry-rgb));
+  --pb-berry-text-rgb: 214 130 151;
+  --pb-berry-text: rgb(var(--pb-berry-text-rgb));
+
+  /* --- Signalfarben ---------------------------------------------------- */
+  --pb-open-rgb: 126 201 138;
+  --pb-open: rgb(var(--pb-open-rgb));
+  --pb-closed-rgb: 224 137 155;
+  --pb-closed: rgb(var(--pb-closed-rgb));
 
   /* --- Schrift ---------------------------------------------------------- */
   --font-display: 'Anton', 'Arial Narrow', 'Helvetica Neue', Impact, sans-serif;
   --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 
   /* Fließende Größen — keine festen px-Werte */
-  /* Höchstwert bewusst auf 4,75rem begrenzt: Die Überschrift steht in einer
-     halbbreiten Spalte, nicht über die ganze Seite. Größer läuft „HANDARBEIT.“
-     auf breiten Monitoren aus der Spalte heraus. */
   --fs-display: clamp(2.75rem, 1.5rem + 5.4vw, 4.75rem);
   --fs-h2: clamp(2rem, 1.35rem + 2.9vw, 3.75rem);
   --fs-h3: clamp(1.375rem, 1.16rem + 0.95vw, 1.875rem);
@@ -198,18 +232,109 @@
   }
 
   /* Helle Sektion — invertiert die Textfarben mit geprüften Kontrasten */
+  /* Helle Sektion — dieselben Farben, andere Rollen. Alle Werte geprüft. */
   .on-cream {
-    background: var(--pb-cream);
+    /* Fläche über --pb-paper, NICHT über --pb-cream: Letzteres wird hier
+       gleich als Schriftfarbe umdefiniert und wäre dann dunkel. */
+    background: var(--pb-paper);
     color: var(--pb-ink);
-    --pb-cream: #141210;
-    --pb-cream-dim: #3d362f;
-    --pb-muted: #5c534a;
-    --pb-line: #d8d0c3;
-    --pb-line-strong: #c2b8a8;
-    --pb-ink-3: #ebe4d9;
-    --pb-ink-4: #e2dace;
-    --pb-ember-text: #9a2f10;
-    --pb-berry-text: #7a2e45;
+    --pb-cream-rgb: 20 16 14;
+    --pb-cream: rgb(var(--pb-cream-rgb));
+    --pb-cream-dim-rgb: 62 51 44;
+    --pb-cream-dim: rgb(var(--pb-cream-dim-rgb));
+    --pb-muted-rgb: 95 83 72;
+    --pb-muted: rgb(var(--pb-muted-rgb));
+    --pb-line-rgb: 221 210 186;
+    --pb-line: rgb(var(--pb-line-rgb));
+    --pb-line-strong-rgb: 195 182 151;
+    --pb-line-strong: rgb(var(--pb-line-strong-rgb));
+    --pb-ink-2-rgb: 247 240 220;
+    --pb-ink-2: rgb(var(--pb-ink-2-rgb));
+    --pb-ink-3-rgb: 242 234 210;
+    --pb-ink-3: rgb(var(--pb-ink-3-rgb));
+    --pb-ink-4-rgb: 233 223 196;
+    --pb-ink-4: rgb(var(--pb-ink-4-rgb));
+    --pb-ember-text-rgb: 165 42 28;
+    --pb-ember-text: rgb(var(--pb-ember-text-rgb));
+    --pb-berry-text-rgb: 122 46 69;
+    --pb-berry-text: rgb(var(--pb-berry-text-rgb));
+    --pb-brass: var(--pb-brass-deep);
+  }
+
+  /* ======================================================================
+     Materialien
+
+     Die Seite kennt drei Oberflächen, und sie wechseln sich ab, damit zehn
+     Abschnitte nicht wie zehnmal dasselbe wirken:
+
+       .surface-night  — die Küche bei Nacht. Grundzustand.
+       .surface-paper  — Metzgerpapier. Trägt Speisekarte und Über uns; eine
+                         Karte ist gedruckt, also gehört sie auf Papier.
+       .glow-griddle   — der warme Schein der heißen Platte, von unten.
+
+     Alle drei entstehen aus CSS und eingebettetem SVG. Keine einzige
+     zusätzliche Bilddatei, keine zusätzliche Anfrage.
+     ====================================================================== */
+
+  .surface-night {
+    background-color: var(--pb-ink);
+  }
+
+  .surface-paper {
+    position: relative;
+    background-color: var(--pb-paper);
+    /* Feine Faserstruktur aus SVG-Rauschen, multiplikativ überlagert */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23p)' opacity='0.42'/%3E%3C/svg%3E");
+    background-size: 220px 220px;
+    background-blend-mode: multiply;
+  }
+
+  /* Gerissene Papierkante am oberen Rand — sitzt über dem dunklen Abschnitt
+     davor und wiederholt sich waagerecht, funktioniert also in jeder Breite. */
+  .surface-paper::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -13px;
+    height: 14px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='14' viewBox='0 0 240 14' preserveAspectRatio='none'%3E%3Cpath d='M0 14V6.4c14-3.2 24 1.6 38-.6s22-4.4 36-2.2 24 5 38 3.4 26-5.6 40-3.8 24 4.6 38 2.8 24-4.2 50-1.6V14z' fill='%23fdf8e4'/%3E%3C/svg%3E");
+    background-repeat: repeat-x;
+    background-size: 240px 14px;
+    pointer-events: none;
+  }
+
+  .glow-griddle {
+    background-image: radial-gradient(
+      130% 72% at 50% 112%,
+      rgb(224 88 64 / 0.2) 0%,
+      rgb(196 55 43 / 0.07) 38%,
+      transparent 66%
+    );
+  }
+
+  /* Messing-Haarlinie als Abschluss — zurückhaltender als ein voller Rahmen */
+  .rule-brass {
+    border: 0;
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      var(--pb-brass) 12%,
+      var(--pb-brass) 88%,
+      transparent
+    );
+    opacity: 0.5;
+  }
+
+  /* Das Siegel — das echte Logo, leicht gedreht wie ein aufgedrückter Stempel */
+  .seal {
+    display: block;
+    transform: rotate(-7deg);
+    filter: drop-shadow(0 10px 26px rgb(0 0 0 / 0.55));
+  }
+  .seal-sm {
+    transform: rotate(-5deg);
   }
 
   .kicker {
@@ -267,7 +392,7 @@
 
   .btn-primary {
     background: var(--pb-ember);
-    color: #f5f0e8;
+    color: #fdf8e4;
     border-color: var(--pb-ember);
   }
   .btn-primary:hover {
@@ -610,6 +735,29 @@
     transition: transform 160ms var(--ease);
   }
   .skip-link:focus { transform: translateY(0); }
+}
+
+
+/*
+  Filmkorn über der ganzen Seite. Ein einziges festes Element, für Zeiger und
+  Tastatur unsichtbar (pointer-events: none). Nimmt der flachen Dunkelfläche
+  das Digitale, ohne die Lesbarkeit anzutasten — die Deckkraft liegt bei knapp
+  drei Prozent.
+*/
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23g)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+  opacity: 0.03;
+  mix-blend-mode: overlay;
+}
+
+@media print {
+  body::after { display: none; }
 }
 
 /* ==========================================================================

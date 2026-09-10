@@ -34,24 +34,26 @@ export function Wordmark({
   );
 }
 
-/** Das Bildzeichen — dieselbe Form wie public/logo.svg. */
+/**
+ * Das Bildzeichen im Seitenkopf — das echte Logo, klein.
+ *
+ * Ohne Bildbeschreibung, weil direkt daneben „Patties & Berries" als Text
+ * steht: Ein Screenreader würde den Namen sonst zweimal vorlesen.
+ */
 export function LogoMark({ size = 32, className = '' }: { size?: number; className?: string }) {
   return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 64 64"
-      aria-hidden="true"
-      focusable="false"
-      className={className}
-    >
-      <path d="M14 22a18 10 0 0 1 36 0v1a1 1 0 0 1-1 1H15a1 1 0 0 1-1-1Z" fill="var(--pb-cream)" />
-      <rect x="12" y="27" width="40" height="9" rx="4.5" fill="var(--pb-ember)" />
-      <path
-        d="M15 40h34a1 1 0 0 1 1 1v2a7 7 0 0 1-7 7H21a7 7 0 0 1-7-7v-2a1 1 0 0 1 1-1Z"
-        fill="var(--pb-cream)"
+    <picture>
+      <source srcSet="/img/logo-siegel-96.webp" type="image/webp" />
+      <img
+        src="/img/logo-siegel-96.png"
+        alt=""
+        aria-hidden="true"
+        width={96}
+        height={96}
+        decoding="async"
+        className={className}
+        style={{ width: size, height: size }}
       />
-      <circle cx="47" cy="17" r="4.5" fill="var(--pb-berry)" />
-    </svg>
+    </picture>
   );
 }

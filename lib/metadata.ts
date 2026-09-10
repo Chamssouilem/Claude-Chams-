@@ -98,7 +98,7 @@ export function buildMetadata({
       images: ['/img/og-image.png'],
     },
     icons: {
-      icon: [{ url: '/icon.svg', type: 'image/svg+xml' }],
+      icon: [{ url: '/icon.png', type: 'image/png', sizes: '64x64' }],
       apple: [{ url: '/apple-icon.png', sizes: '180x180' }],
     },
     manifest: '/manifest.webmanifest',

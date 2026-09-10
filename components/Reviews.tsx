@@ -34,7 +34,7 @@ export function Reviews({ locale }: { locale: Locale }) {
   return (
     <section
       id="bewertungen"
-      className="section border-b border-line bg-ink-2"
+      className="surface-night section border-b border-line"
       aria-labelledby="reviews-title"
     >
       <div className="shell">

@@ -291,7 +291,7 @@ npm run start        # das Ergebnis lokal ansehen
 | Befehl | Was es tut |
 |---|---|
 | `npm run fonts` | Lädt Anton und Inter neu herunter und legt sie lokal ab |
-| `npm run icons` | Erzeugt die App-Symbole und das Teilen-Bild aus dem Logo |
+| `npm run icons` | Erzeugt App-Symbole und Teilen-Bild aus `public/img/logo-siegel.png` (Python, benötigt Pillow) |
 | `npm run photo-brief` | Erzeugt `FOTO-BRIEFING.md` neu aus `data/photos.json` |
 
 **Netlify:** Die Datei `netlify.toml` ist fertig eingerichtet. Beim Verbinden des
@@ -356,6 +356,77 @@ muss. Stattdessen erzeugt die Seite eine fertig formulierte WhatsApp-Nachricht a
 dieselbe Nummer wie bisher — nur diesmal vollständig, sortiert und ohne Rückfragen.
 
 ---
+
+## Gestaltung
+
+### Die Farben kommen aus dem Logo
+
+Der runde Anstecker des Ladens bringt vier Töne mit. Sie wurden aus der Datei
+abgetastet, nicht nachempfunden:
+
+| Rolle auf der Seite | Herkunft im Logo | Wert |
+|---|---|---|
+| Grundfläche | das dunkle Braun der Patties, bis fast ins Schwarz gezogen | `#14100E` |
+| Schrift und helle Flächen | der äußere Ring | `#FDF8E4` |
+| Handlung (Knöpfe, Akzente) | das Rot der Kreisfläche | `#C4372B` |
+| Zierrat (Stempel, Haarlinien) | der Goldring | `#E1A859` |
+
+Damit sieht die Seite nach diesem Laden aus und trotzdem nicht nach
+Rot-Gelb-Schnellrestaurant. Es sind dieselben Farben — nur in anderer Menge und
+anderer Rolle: Das Rot trägt nicht die Fläche, sondern nur das, was angeklickt
+werden soll.
+
+Cremefarbene Schrift auf dem Markenrot erreicht 5,02:1, das Rot gegen den
+dunklen Grund 3,54:1. Beide Werte liegen über der Anforderung — der
+Bestellknopf darf also die echte Logofarbe tragen, ohne dass jemand die Schrift
+darauf schlechter liest.
+
+**Wichtig für spätere Änderungen:** Die Farbwerte stehen als *Kanalwerte* in
+`app/globals.css` (`--pb-ink-rgb: 20 16 14`), nicht als Hex-Werte. Nur so
+funktionieren Tailwinds Deckkraft-Angaben wie `bg-ink/95` — mit einem Hex-Wert
+entsteht dort ungültiges CSS, und der Browser verwirft die Regel wortlos.
+`npm run check:contrast` liest genau diese Kanalwerte und rechnet sie zurück,
+prüft also das, was tatsächlich ausgeliefert wird.
+
+### Drei Oberflächen, damit zehn Abschnitte nicht wie zehnmal dasselbe wirken
+
+- **Nacht** (`.surface-night`) — der Grundzustand. Einstieg, Handwerk,
+  Bestellung, Bewertungen, Finden, Fußbereich.
+- **Metzgerpapier** (`.surface-paper`) — warmes Creme mit feiner Faserstruktur
+  und gerissener Oberkante. Trägt Speisekarte und Über uns. Eine Karte ist
+  gedruckt, also gehört sie auf Papier; die Führungspunkte zwischen Gericht und
+  Preis wirken dort wie eine Preistafel im Laden statt wie eine Tabelle im Netz.
+- **Grillglut** (`.glow-griddle`) — ein warmer Schein von unten, wie das Licht
+  der heißen Platte. Nur im Einstieg.
+
+Papierstruktur, Filmkorn und die gerissene Kante entstehen aus eingebettetem
+SVG-Rauschen in der CSS. Keine einzige zusätzliche Bilddatei, keine zusätzliche
+Anfrage.
+
+### Der Stempel
+
+Das vorhandene Logo ist ein runder Anstecker. In einer Umgebung, die nach
+Metzgerei aussehen soll, liest sich diese Form von selbst als **Stempel** — der
+Abdruck auf dem Packpapier, das Prüfsiegel am Fleisch. Daraus ist das Hauptmotiv
+geworden:
+
+- Das echte Logo sitzt schräg auf der Kante des Einstiegsbildes, wie
+  aufgedrückt. Am Logo selbst wurde nichts verändert; es ist nur freigestellt
+  und in moderne Formate gebracht (`components/Seal.tsx`).
+- Die drei Handwerk-Panels tragen rein typografische Textstempel in Messing —
+  „01 · Täglich gewolft · Ganze Cuts" und so weiter. Sie sitzen dort, wo im
+  Metzgerhandwerk der Prüfstempel sitzt, und tragen genau die Behauptungen, die
+  den Preis rechtfertigen. Aufgebaut aus SVG-Text auf einer Kreisbahn, also in
+  jeder Größe scharf und vorlesbar.
+
+Ein Wettbewerber kann das nicht dadurch kopieren, dass er dieselbe Vorlage
+kauft.
+
+### Was bewusst nicht vorkommt
+
+Kreidetafel, Vintage-Holz, Korbschale, Cartoon-Maskottchen, Schreibschrift als
+Überschrift, „Since 19XX"-Plaketten. Das sind die Zeichen, an denen man eine
+gekaufte Vorlage erkennt.
 
 ## Rechtliches
 

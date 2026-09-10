@@ -42,8 +42,15 @@ export function Photo({ id, locale, className = '', priority, sizes }: PhotoProp
   if (!photo.src) {
     return (
       <figure
-        className={`relative overflow-hidden border border-dashed border-line-strong bg-ink-2 ${className}`}
-        style={{ aspectRatio: ratio }}
+        /* Feste Farben statt Token: Der Platzhalter erscheint sowohl auf
+           dunklem Grund als auch auf Metzgerpapier und muss in beiden Fällen
+           lesbar bleiben. Ein echtes Foto ist hier später ohnehin dunkel. */
+        className={`relative overflow-hidden border border-dashed ${className}`}
+        style={{
+          aspectRatio: ratio,
+          backgroundColor: '#1d1714',
+          borderColor: '#4c3f36',
+        }}
       >
         {/* Schraffur — rein dekorativ */}
         <div
@@ -56,16 +63,25 @@ export function Photo({ id, locale, className = '', priority, sizes }: PhotoProp
         />
         <figcaption className="absolute inset-0 flex flex-col justify-between gap-3 p-4 sm:p-5">
           <div className="flex items-start justify-between gap-3">
-            <span className="inline-flex items-center gap-2 text-micro font-semibold uppercase tracking-[0.16em] text-ember-text">
+            <span
+              className="inline-flex items-center gap-2 text-micro font-semibold uppercase tracking-[0.16em]"
+              style={{ color: '#ee7357' }}
+            >
               <CameraGlyph />
               {locale === 'de' ? 'Foto fehlt noch' : 'Photo pending'}
             </span>
-            <span className="tnum shrink-0 rounded-sm border border-line-strong bg-ink px-2 py-1 text-micro text-cream-dim">
+            <span
+              className="tnum shrink-0 rounded-sm border px-2 py-1 text-micro"
+              style={{ borderColor: '#4c3f36', backgroundColor: '#14100e', color: '#d6cbb4' }}
+            >
               {photo.width} × {photo.height}
             </span>
           </div>
-          <p className="max-w-[46ch] text-micro leading-relaxed text-muted">
-            <span className="font-semibold text-cream-dim">{photo.id}</span> — {photo.shot[locale]}
+          <p className="max-w-[46ch] text-micro leading-relaxed" style={{ color: '#ac9f8a' }}>
+            <span className="font-semibold" style={{ color: '#d6cbb4' }}>
+              {photo.id}
+            </span>{' '}
+            — {photo.shot[locale]}
           </p>
         </figcaption>
       </figure>

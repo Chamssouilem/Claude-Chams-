@@ -1,9 +1,22 @@
 import { Photo } from './Photo';
+import { Stamp } from './Seal';
 import { Reveal } from './Reveal';
 import { c } from '@/lib/content';
 import type { Locale } from '@/lib/types';
 
 const PHOTO_IDS = ['handwerk-fleisch', 'handwerk-brot', 'handwerk-grill'] as const;
+
+/**
+ * Die Stempel zu den drei Panels. Sie tragen genau die Behauptungen, die den
+ * Preis rechtfertigen — dorthin gesetzt, wo im Metzgerhandwerk der Prüfstempel
+ * sitzt. Der Text steht hier und nicht in der Übersetzungsdatei, weil er Teil
+ * der Grafik ist und in beiden Sprachen gleich funktioniert.
+ */
+const STAMPS = [
+  { top: '· TÄGLICH GEWOLFT ·', center: '01', bottom: '· GANZE CUTS ·', tilt: -9 },
+  { top: '· JEDEN MORGEN ·', center: '02', bottom: '· VOM BÄCKER ·', tilt: 7 },
+  { top: '· OHNE AUSNAHME ·', center: '03', bottom: '· 100 % HELAL ·', tilt: -5 },
+] as const;
 
 /**
  * „Unser Handwerk“ — der Abschnitt, der den Preis trägt.
@@ -20,7 +33,7 @@ export function Handwerk({ locale }: { locale: Locale }) {
   const x = c(locale);
 
   return (
-    <section id="handwerk" className="section border-b border-line" aria-labelledby="handwerk-title">
+    <section id="handwerk" className="surface-night section border-b border-line" aria-labelledby="handwerk-title">
       <div className="shell">
         <Reveal>
           <p className="kicker">{x.handwerk.kicker}</p>
@@ -46,9 +59,14 @@ export function Handwerk({ locale }: { locale: Locale }) {
                 className="w-full"
               />
               <div className="mt-5 flex items-start gap-4">
-                <span className="panel-number" aria-hidden="true">
-                  {String(i + 1).padStart(2, '0')}
-                </span>
+                <Stamp
+                  arcTop={STAMPS[i].top}
+                  center={STAMPS[i].center}
+                  arcBottom={STAMPS[i].bottom}
+                  tilt={STAMPS[i].tilt}
+                  size={104}
+                  className="-mt-2 shrink-0 text-brass"
+                />
                 <div>
                   <h3 className="text-h3">{panel.title}</h3>
                   <p className="mt-3 font-medium text-cream">{panel.lead}</p>

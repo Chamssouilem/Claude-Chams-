@@ -12,7 +12,7 @@ export function Vouchers({ locale }: { locale: Locale }) {
   )}`;
 
   return (
-    <section id="gutscheine" className="section border-b border-line" aria-labelledby="vouchers-title">
+    <section id="gutscheine" className="surface-night section border-b border-line" aria-labelledby="vouchers-title">
       <div className="shell grid items-center gap-block md:grid-cols-12 md:gap-10">
         <Reveal className="md:col-span-7">
           <p className="kicker">{x.vouchers.kicker}</p>

@@ -7,7 +7,7 @@ export function About({ locale }: { locale: Locale }) {
   const x = c(locale);
 
   return (
-    <section id="ueber-uns" className="section border-b border-line" aria-labelledby="about-title">
+    <section id="ueber-uns" className="on-cream surface-paper section" aria-labelledby="about-title">
       <div className="shell grid gap-block md:grid-cols-12 md:gap-10">
         <Reveal className="md:col-span-5">
           <Photo

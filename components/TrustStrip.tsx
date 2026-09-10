@@ -31,7 +31,7 @@ export function TrustStrip({ locale }: { locale: Locale }) {
   ];
 
   return (
-    <section aria-label={x.trust.label} className="border-b border-line bg-ink-2">
+    <section aria-label={x.trust.label} className="surface-night relative border-y border-line">
       <div className="shell">
         <ul className="no-scrollbar flex items-center gap-x-3 gap-y-1 overflow-x-auto py-3.5 text-small text-cream-dim md:flex-wrap md:justify-center md:overflow-visible">
           {facts.map((fact, i) => (
